@@ -52,7 +52,7 @@ def parse_flow_logs_mmap(flow_file, lookup_table, output_file):
             dstport = parts[5].strip()
             protocol_number = parts[7].strip()
             # lower case to make sure case-insensitive
-            protocol = protocol_map.get(protocol_number, "unknown").lower()
+            protocol = protocol_map.get(protocol_number, f"unknown({protocol_number})").lower()
 
             # Check lookup table for matching tags
             tags = lookup_table.get((dstport, protocol))
