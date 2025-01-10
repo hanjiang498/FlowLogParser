@@ -4,6 +4,21 @@ import mmap
 import os
 from datetime import datetime
 
+def normalize_tag(tag):
+    """
+    Normalize a tag to the desired format.
+    Example: Converts 'SV_P3' or 'sv_p3' to 'sv_P3'.
+
+    Args:
+        tag (str): Original tag.
+
+    Returns:
+        str: Normalized tag.
+    """
+    parts = tag.split('_')
+    if len(parts) == 2:
+        return f"{parts[0].lower()}_{parts[1].capitalize()}"
+    return tag.lower()  # Fallback to lowercasing for unexpected formats
 
 def load_lookup_table(lookup_file):
     """
@@ -18,10 +33,11 @@ def load_lookup_table(lookup_file):
     lookup_table = defaultdict(list)
     with open(lookup_file, "r") as file:
         reader = csv.DictReader(file)
+        # case insensitive for both protocol name and tag name
         for row in reader:
             dstport = row['dstport'].strip()
             protocol = row['protocol'].strip().lower()
-            tag = row['tag'].strip()
+            tag = normalize_tag(row['tag'].strip())
             lookup_table[(dstport, protocol)].append(tag)
     return lookup_table
 

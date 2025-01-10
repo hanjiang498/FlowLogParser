@@ -73,15 +73,19 @@ Script to parse flow log data, map records to tags based on a lookup table and c
    - Tested with malformed flow log entries (e.g., missing fields, invalid data).
    - The flow log should contain: <br> version, account ID, interface ID, source address, dest address, dest port, source port, protocol,  packets, bytes, start time, end time, action log status.
    - script skips malformed lines without crashing.
+   
+3. **Unknown Protocol**:
+   - Tested with unknown Protocol (e.g., other than tcp, udp and icmp protocols).
+   - script mark them as "unkonwn(protocol number)".
 
-3. **Empty Files**:
+4. **Empty Files**:
    - Verified handling of empty flow log and lookup table files.
    - script generates a valid output file indicating no data was processed.
 
-4. **Case Insensitivity**:
-   - Confirmed protocol matching is case insensitive (e.g., `TCP` matches `tcp`).
+5. **Case Insensitivity**:
+   - Confirmed protocol matching is case insensitive (e.g., `TCP` matches `tcp`, `SV_P3` and `sv_p3` are formatted to `sv_P3`).
 
-5. **Multiple Tags for a Port/Protocol**:
+6. **Multiple Tags for a Port/Protocol**:
    - Verified logs matching multiple tags update all relevant counts.
 
 ### Performance Tests
