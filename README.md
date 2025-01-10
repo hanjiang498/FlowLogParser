@@ -23,7 +23,7 @@ Script to parse flow log data, map records to tags based on a lookup table and c
 ## Usage
 
 1. **Prepare Input Files**：
-   - Place your flow log file（e.g., `flow_logs_sample.txt`）and lookup table file （e.g., `lookup_table_sample.csv`）in the project/data directory.
+   - Place your flow log file（e.g., `flow_logs_sample.txt`）and lookup table file （e.g., `lookup_table_sample.csv`）in the project/data directory (replace the file with the same file name, otherwise you need to modify the file name in src/main.py).
    - Ensure the lookup table file is in the following format (CSV format):
      ```csv
      dstport,protocol,tag
